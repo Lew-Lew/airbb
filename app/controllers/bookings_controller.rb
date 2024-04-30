@@ -4,8 +4,13 @@ class BookingsController < ApplicationController
     @flat = Flat.find(params[:flat_id])
     @booking = Booking.new(booking_params)
     @booking.flat = @flat
-    @booking.save
-    redirect_to flat_path(@flat)
+    if @booking.save
+      redirect_to flat_path(@flat)
+    else
+      render "flats#show"
+    end
+
+    
   end
 
   private
