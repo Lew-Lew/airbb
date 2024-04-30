@@ -10,7 +10,16 @@
 
 puts "Cleaning database..."
 Flat.destroy_all
+User.destroy_all
+
+puts "Creating 2 users..."
+User.create!(email: "user1@email.com", password: "password")
+User.create!(email: "user2@email.com", password: "password")
+User.create!(email: "user3@email.com", password: "password")
 
 puts "Creating 3 flats..."
+Flat.create!(name: "Flat in Paris", description: "Nice flat in Paris", price_per_night: 100, user_id: User.first.id)
+Flat.create!(name: "Flat in London", description: "Nice flat in London", price_per_night: 200, user_id: User.last.id)
+Flat.create!(name: "Flat in Berlin", description: "Nice flat in Berlin", price_per_night: 150, user_id: User.first.id)
 
 puts "Finished!"
