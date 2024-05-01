@@ -19,13 +19,13 @@ User.create!(email: "user2@email.com", password: "password")
 User.create!(email: "user3@email.com", password: "password")
 
 puts "Creating 3 flats..."
-Flat.create!(name: "Flat in Paris", description: "Nice flat in Paris", price_per_night: 100, user_id: User.first.id)
-Flat.create!(name: "Flat in London", description: "Nice flat in London", price_per_night: 200, user_id: User.last.id)
-Flat.create!(name: "Flat in Berlin", description: "Nice flat in Berlin", price_per_night: 150, user_id: User.first.id)
+Flat.create!(name: "Flat in Paris", description: "Nice flat in Paris", price_per_night: 100, user_id: User.first.id, address: "48 rue marguerite de rochechouart,Paris" )
+Flat.create!(name: "Flat in London", description: "Nice flat in London", price_per_night: 200, user_id: User.last.id, address: "49 rue marguerite de rochechouart,Paris" )
+Flat.create!(name: "Flat in Berlin", description: "Nice flat in Berlin", price_per_night: 150, user_id: User.first.id, address: "47 rue marguerite de rochechouart,Paris" )
 
 puts "Creating 3 bookings"
 Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 300, user_id: User.first.id, flat_id: Flat.first.id, status: "pending")
-Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 600, user_id: User.last.id, flat_id: Flat.last.id, status: "confirmed")
+Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 600, user_id: User.last.id, flat_id: Flat.first.id, status: "confirmed")
 Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 450, user_id: User.first.id, flat_id: Flat.last.id, status: "confirmed")
 
 puts "Finished!"
