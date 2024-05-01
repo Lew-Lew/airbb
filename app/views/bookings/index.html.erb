@@ -1,0 +1,8 @@
+<h1>Index bookings</h1>
+
+<% @bookings_per_user.each do |booking| %>
+  <p><%= booking.user.email %></p>
+  <p><%= booking.start_date %></p>
+  <p><%= booking.end_date %></p>
+  <p><%= booking.total_price %></p>
+<% end %>
