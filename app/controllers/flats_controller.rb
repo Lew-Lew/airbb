@@ -1,6 +1,9 @@
 class FlatsController < ApplicationController
   def index
     @flats = Flat.all
+    if params[:query].present?
+      @flats = @flats.where("name LIKE ?", "%#{params[:query]}%")
+    end
 
     # The `geocoded` scope filters only flats with coordinates
     @markers = @flats.geocoded.map do |flat|
