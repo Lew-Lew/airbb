@@ -8,6 +8,7 @@
         <h6 class="card-subtitle mb-2 text-body-secondary"><%= flat.price_per_night %></h6>
         <p class="card-text"><%= flat.description %></p>
         <%= link_to "voir plus", flat_path(flat) %>
+        <%= link_to "bookings", flat_bookings_path(flat) %>
       </div>
     </div>
   <% end %>

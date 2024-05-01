@@ -1,5 +1,10 @@
 class BookingsController < ApplicationController
 
+  def index
+    @flat = Flat.find(params[:flat_id])
+    @bookings_per_flat = @flat.bookings
+  end
+
   def my_bookings
     @bookings_per_user = current_user.bookings
   end
@@ -34,6 +39,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :status, :total_price, :user_id, :flat_id)
+    params.require(:booking).permit(:start_date, :end_date, :status, :total_price)
   end
 end
