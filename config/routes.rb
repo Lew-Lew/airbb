@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
   resources :flats do
-    resources :bookings, only: [:index, :show, :create]
+    resources :bookings, only: [:index, :show, :create] do
+      member do
+        patch :update_status
+      end
+    end
   end
 
   get '/my_bookings', to: 'bookings#my_bookings'

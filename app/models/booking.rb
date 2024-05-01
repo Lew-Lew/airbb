@@ -5,7 +5,8 @@ class Booking < ApplicationRecord
   validates :start_date, :end_date, presence: true
   validates :status, presence: true, inclusion: { in: ["pending", "confirmed", "declined"] }
   validate :start_date_before_end_date
-  validate :no_overlap
+  validate :no_overlap, on: :create
+  validate :no_overlap_on_update, on: :update
 
   private
 
@@ -18,6 +19,14 @@ class Booking < ApplicationRecord
   def no_overlap
     if (Booking.where(flat_id: flat_id).where("(? <= end_date) and (? >= start_date)", self.start_date, self.end_date).where(status: "confirmed").any?)
       errors.add(:base, 'There is an overlapping booking')
+    end
+  end
+
+  def no_overlap_on_update
+    if self.status == "confirmed"
+      if (Booking.where(flat_id: flat_id).where("(? <= end_date) and (? >= start_date)", self.start_date, self.end_date).where(status: "confirmed").any?)
+        errors.add(:base, 'There is an overlapping booking')
+      end
     end
   end
 end

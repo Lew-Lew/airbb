@@ -36,6 +36,15 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
   end
 
+  def update_status
+    logger.debug "CEST ICIIIIIII"
+
+    @booking = Booking.find(params[:id])
+    logger.debug @booking
+    @booking.update(status: params[:status])
+    redirect_to flat_bookings_path(@booking.flat)
+  end
+
   private
 
   def booking_params

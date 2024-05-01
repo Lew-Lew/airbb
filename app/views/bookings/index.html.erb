@@ -1,12 +1,17 @@
 <h1>les bookings de cet appart</h1>
 
 <% @bookings_per_flat.each do |booking| %>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><%= booking.start_date %></h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary"><%= booking.end_date %></h6>
-      <p class="card-text"><%= booking.user.email %></p>
-      <p class="card-text"><%= booking.status %></p>
+  <% if(booking.status != "declined") %>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= booking.start_date %></h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary"><%= booking.end_date %></h6>
+        <p class="card-text"><%= booking.user.email %></p>
+        <p class="card-text"><%= booking.status %></p>
+
+        <%= button_to 'Confirmer',  update_status_flat_booking_path(booking.flat, booking, status: 'confirmed'), method: :patch %>
+        <%= button_to 'Annuler',  update_status_flat_booking_path(booking.flat, booking, status: 'declined'), method: :patch %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
