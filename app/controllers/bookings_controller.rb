@@ -5,6 +5,12 @@ class BookingsController < ApplicationController
   end
 
   def create
+    if !user_signed_in?
+      flash[:error] = "You need to sign in to book a flat"
+      redirect_to new_user_session_path
+      return
+    end
+    
     @flat = Flat.find(params[:flat_id])
     @booking = Booking.new(booking_params)
     @booking.flat = @flat
@@ -18,7 +24,7 @@ class BookingsController < ApplicationController
       # TODO fix flash.now to use with render
       # render "flats/show"
       redirect_to flat_path(@flat)
-    end
+    end 
   end
 
   def show
