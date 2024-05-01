@@ -3,6 +3,11 @@
 <p><%= @flat.price_per_night %></p>
 
 <div>
+  <% if flash[:error] %>
+    <div class="alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
   <%= simple_form_for [@flat, @booking] do |f| %>
     <%= f.input :start_date,
                 as: :string,

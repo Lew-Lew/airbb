@@ -15,7 +15,10 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to flats_path
     else
-      render "flats/show"
+      flash[:error] = @booking.errors.full_messages.join(", ")
+      # TODO fix flash.now to use with render
+      # render "flats/show"
+      redirect_to flat_path(@flat)
     end
   end
 
