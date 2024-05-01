@@ -10,6 +10,8 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.flat = @flat
     @booking.user = current_user
+    @booking.status = "pending"
+    @booking.total_price = @booking.flat.price_per_night * (@booking.end_date - @booking.start_date).to_i
     if @booking.save
       redirect_to flats_path
     else
@@ -20,6 +22,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :status, :total_price, :user_id, :flat_id)
   end
 end

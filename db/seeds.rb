@@ -24,8 +24,8 @@ Flat.create!(name: "Flat in London", description: "Nice flat in London", price_p
 Flat.create!(name: "Flat in Berlin", description: "Nice flat in Berlin", price_per_night: 150, user_id: User.first.id)
 
 puts "Creating 3 bookings"
-Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 300, user_id: User.first.id, flat_id: Flat.first.id)
-Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 600, user_id: User.last.id, flat_id: Flat.last.id)
-Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 450, user_id: User.first.id, flat_id: Flat.last.id)
+Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 300, user_id: User.first.id, flat_id: Flat.first.id, status: "pending")
+Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 600, user_id: User.last.id, flat_id: Flat.last.id, status: "confirmed")
+Booking.create!(start_date: Date.today, end_date: Date.today + 3, total_price: 450, user_id: User.first.id, flat_id: Flat.last.id, status: "confirmed")
 
 puts "Finished!"
