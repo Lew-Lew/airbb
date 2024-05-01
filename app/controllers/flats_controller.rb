@@ -2,7 +2,7 @@ class FlatsController < ApplicationController
   def index
     @flats = Flat.all
     if params[:query].present?
-      @flats = @flats.where("name LIKE ?", "%#{params[:query]}%")
+      @flats = @flats.where("name LIKE ? OR address LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     end
 
     # The `geocoded` scope filters only flats with coordinates
