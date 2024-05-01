@@ -1,8 +1,7 @@
 class BookingsController < ApplicationController
 
   def my_bookings
-    @bookings = Booking.all
-    @bookings_per_user = @bookings.where(user_id: current_user)
+    @bookings_per_user = current_user.bookings
   end
 
   def create
