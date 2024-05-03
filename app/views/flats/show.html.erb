@@ -1,27 +1,32 @@
-<h1><%= @flat.name %></h1>
-<p><%= @flat.description %></p>
-<p><%= @flat.price_per_night %></p>
+<div class="flat-content-layout">
+  <div class="flat-content">
+    <h1><%= @flat.name %> | <%= @flat.price_per_night %>€ par nuit</h1>
+    <p><%= @flat.description %></p>
+    <p><%= @flat.address %></p>
 
-<div>
-  <div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-</div>
-
-<div>
-  <% if flash[:error] %>
-    <div class="alert alert-danger">
-      <%= flash[:error] %>
+    <div class="mt-5">
+      <div style="width: 80%; height: 300px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
-  <% end %>
-  <%= simple_form_for [@flat, @booking] do |f| %>
-    <%= f.input :start_date,
-                as: :string,
-                input_html: { data: { controller: "datepicker" } } %>
-    <%= f.input :end_date,
+  </div>
+
+  <div class="flat-booking-form-wrapper">
+    <% if flash[:error] %>
+      <div class="alert alert-danger">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+    <%= simple_form_for [@flat, @booking] do |f| %>
+      <%= f.input :start_date,
             as: :string,
-            input_html: { data: { controller: "datepicker" } } %>
-    <%= f.submit "Ask for booking", class: "btn btn-primary" %>
-  <% end %>
+            input_html: { class: "bg-white", data: { controller: "datepicker" } } %>
+      <%= f.input :end_date,
+              as: :string,
+              input_html: { class: "bg-white", data: { controller: "datepicker" } } %>
+      <%= f.submit "Ask for booking", class: "btn btn-primary w-100" %>
+    <% end %>
+  </div>
 </div>
+

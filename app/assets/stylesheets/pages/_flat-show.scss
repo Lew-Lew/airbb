@@ -1,0 +1,15 @@
+.flat-content-layout {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; 
+  padding: 60px 120px;
+}
+
+.flat-content {
+  flex-grow: 2;
+}
+
+.flat-booking-form-wrapper {
+  flex-grow: 1;
+  margin-left: 20px;
+}
