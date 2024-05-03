@@ -1,4 +1,4 @@
-<h1>flat index</h1>
+
 <!-- TODO: Insert inside the `.container`, above the first `.row` -->
 <div class="row justify-content-center">
   <div class="col-sm-8 my-3">
@@ -14,22 +14,27 @@
 </div>
 <!-- [...] -->
 
-<div class="d-flex justify-content-evenly">
-  <% @flats.each do |flat| %>
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title"><%= flat.name %></h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary"><%= flat.price_per_night %></h6>
-        <p class="card-text"><%= flat.description %></p>
-        <%= link_to "voir plus", flat_path(flat) %>
+<div class="section-flats">
+  <div class="flats-layout">
+    <% @flats.each do |flat| %>
+      <div >
+        <div class="card" style="max-width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= flat.name %></h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary"><%= flat.price_per_night %></h6>
+            <p class="card-text"><%= flat.description %></p>
+            <%= link_to "voir plus", flat_path(flat) %>
+          </div>
+        </div>
       </div>
+    <% end %>
+  </div>
+  <div class="flats-map" >
+    <div style="height: 90vh; position: sticky; top: 20px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
-  <% end %>
+  </div>
 </div>
 
-<div>
-  <div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-</div>
