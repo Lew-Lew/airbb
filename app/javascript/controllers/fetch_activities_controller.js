@@ -14,7 +14,7 @@ export default class extends Controller {
 
   fetchActivities() {
     var city = this.getCityFromAddress(this.addressTarget.innerText);
-    fetch(`http://localhost:3000/activities?city=${city}`)
+    fetch(`${window.backendUrl}/activities?city=${city}`)
       .then(response => response.json())
       .then((data) => {
         console.log(data.length);

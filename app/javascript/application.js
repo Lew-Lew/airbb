@@ -4,3 +4,6 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 import "flatpickr"
+
+// Activities API URL
+window.backendUrl = "http://localhost:8080";
