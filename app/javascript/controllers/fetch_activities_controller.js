@@ -17,7 +17,11 @@ export default class extends Controller {
     fetch(`http://localhost:3000/activities?city=${city}`)
       .then(response => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data.length);
+        if (data.length === 0) {
+          this.activitiesTarget.innerHTML = ``;
+          return;
+        }
         this.activitiesTarget.innerHTML = `
           <h2>Activities in ${city}</h2>
           <ul>
