@@ -7,13 +7,18 @@ class FlatsController < ApplicationController
       @flats = @flats.where("name LIKE ? OR address LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     end
 
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'flats/list', locals: { flats: @flats },  formats: :html }
+    end
+
     # The `geocoded` scope filters only flats with coordinates
     @markers = @flats.geocoded.map do |flat|
       {
         lat: flat.latitude,
         lng: flat.longitude
       }
-    end
+    end 
   end
 
   def my_flats
