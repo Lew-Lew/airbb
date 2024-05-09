@@ -6,12 +6,6 @@ class FlatsController < ApplicationController
     if params[:query].present?
       @flats = @flats.where("name LIKE ? OR address LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     end
-
-    respond_to do |format|
-      format.html # Follow regular flow of Rails
-      format.text { render partial: 'flats/list', locals: { flats: @flats },  formats: :html }
-    end
-
     # The `geocoded` scope filters only flats with coordinates
     @markers = @flats.geocoded.map do |flat|
       {
@@ -19,6 +13,15 @@ class FlatsController < ApplicationController
         lng: flat.longitude
       }
     end 
+
+    # This is to respond to the AJAX request
+    respond_to do |format|
+      # Follow regular flow of Rails if the request is HTML
+      format.html 
+      # This will render the partial `flats/list.html.erb` with the locals `flats` and `formats` as `html` if the request is JS (AJAX)
+      format.text { render partial: 'flats/list', locals: { flats: @flats },  formats: :html }
+    end
+
   end
 
   def my_flats

@@ -5,41 +5,25 @@ export default class extends Controller {
   static targets = [ "form", "list", "searchInput" ]
 
   connect() {
-    console.log(this.element);
-    console.log(this.formTarget);
-    console.log(this.listTarget);
-    console.log(this.searchInputTarget);
+    console.log("hello from search flat controller");
   }
 
-  update() {
-    const url = `${this.formTarget.action}?query=${this.searchInputTarget.value}`
+  update(event) {
+    event.preventDefault();
+    let searchValue = this.searchInputTarget.value;
+    const url = `${this.formTarget.action}?query=${searchValue}`
+    // on va chercher les données de sur l'URL de l'action du formulaire avec les query params
+    // les headers permettent de dire qu'on veut récupérer du text/plain 
     fetch(url, { headers: { 'Accept': 'text/plain' } })
+      // on récupère la réponse en texte
       .then(response => response.text())
+      // on affiche le texte dans la console
+      // on remplace le contenu de la liste par le texte
       .then((data) => {
-        console.log(data);
         this.listTarget.outerHTML = data;
-      })
+        // remettre l'input à vide
+        this.searchInputTarget.value = '';
+      }
+    )
   }
-
-  // submit(event) {
-  //   // prevent default form submission
-  //   event.preventDefault()
-  //   console.log("Submit")
-  //   var input_value = this.inputTarget.value;
-
-  //   // fetch the search results
-  //   fetch(`/flats?query=${input_value}`)
-  //     .then(response => {
-  //       response.text();
-  //     })
-  //     .then(html => {
-  //       console.log(html)
-  //       // replace the search results
-  //       // document.getElementById("search-results").innerHTML = html
-  //     })
-  //     .catch(error => {
-  //       console.error(error)
-  //     })
-  //   // display the search results
-  // }
 }

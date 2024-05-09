@@ -16,6 +16,20 @@
   height: 100%;
 }
 
+.card {
+  max-width: 18rem;
+  max-height: 18rem;
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      margin-top: auto;
+    }
+  }
+}
+
 /*Media Queries*/
 
 /*Smallest device*/

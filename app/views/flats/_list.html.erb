@@ -1,8 +1,25 @@
 <div data-search-flat-target="list">
-  <h1>test partiale</h1>
-  <ul>
-  <% flats.each do |flat| %>
-    <li><%= flat.name %></li>
-  <% end %>
-</ul>
+  <div class="section-flats">
+    <div class="flats-layout">
+      <% @flats.each do |flat| %>
+        <div >
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= flat.name %></h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary"><%= flat.price_per_night %></h6>
+              <p class="card-text"><%= flat.description %></p>
+              <%= link_to "voir plus", flat_path(flat) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="flats-map" >
+      <div style="height: 90vh; position: sticky; top: 20px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    </div>
+  </div>
 </div>
