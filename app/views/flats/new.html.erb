@@ -4,6 +4,8 @@
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.input :price_per_night, as: :integer %>
+  <%= f.input :guest, as: :integer %>
   <%= f.input :address %>
+
   <%= f.submit "Add a flat", class: "btn btn-primary" %>
 <% end %>

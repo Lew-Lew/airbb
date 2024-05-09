@@ -27,11 +27,12 @@ class FlatsController < ApplicationController
 
     # The `geocoded` scope filters only flats with coordinates
     @markers = @flats.geocoded.map do |flat|
-      {
-        lat: flat.latitude,
-        lng: flat.longitude
-      }
+        {
+          lat: flat.latitude,
+          lng: flat.longitude
+        } 
     end 
+    logger.debug @markers
 
     # This is to respond to the AJAX request
     respond_to do |format|
