@@ -10,7 +10,21 @@ class FlatsController < ApplicationController
     if params[:guest].present?
       @flats = @flats.where("guest >= ?", params[:guest])
     end
-    
+
+    if params[:sort].present?
+      case params[:sort]
+      when 'price_asc'
+        @flats = @flats.order(price_per_night: :asc)
+      when 'price_desc'
+        @flats = @flats.order(price_per_night: :desc)
+      when 'guests_asc'
+        @flats = @flats.order(guest: :asc)
+      when 'guests_desc'
+        @flats = @flats.order(guest: :desc)
+      end
+    end
+
+
     # The `geocoded` scope filters only flats with coordinates
     @markers = @flats.geocoded.map do |flat|
       {

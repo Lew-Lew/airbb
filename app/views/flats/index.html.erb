@@ -26,6 +26,23 @@
     </div>
   </div>
 
+  <div>
+   <%= form_tag flats_path, method: :get, data: { search_flat_target: 'sorter' } do %>
+    <%= select_tag :filter_option,
+        options_for_select([
+          ['Tri par défaut', 'default'],
+          ['prix croissant', 'price_asc'],
+          ['prix décroissant', 'price_desc'],
+          ['guests croissant', 'guests_asc'],
+          ['guests décroissant', 'guests_desc']
+        ]),
+        class: "form-control",
+        data: { 
+          action: "change->search-flat#filter"
+        }
+    %>
+    <% end %>
+  </div>
   <%= render 'flats/list', flats: @flats %>
 </div>
 
