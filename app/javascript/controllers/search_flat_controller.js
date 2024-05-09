@@ -8,15 +8,7 @@ export default class extends Controller {
     console.log("hello from search flat controller");
   }
 
-
-  
-  update(event) {
-    event.preventDefault();
-    this.searchValue = this.searchInputTarget.value;
-    this.searchGuest = this.searchGuestTarget.value;
-    this.minPrice = this.minPriceTarget.value;
-    this.maxPrice = this.maxPriceTarget.value;
-    const url = `${this.formTarget.action}?query=${this.searchValue}&guest=${this.searchGuest}&min_price=${this.minPrice}&max_price=${this.maxPrice}`
+  fetch_flat(url) {
     // on va chercher les données de sur l'URL de l'action du formulaire avec les query params
     // les headers permettent de dire qu'on veut récupérer du text/plain 
     fetch(url, { headers: { 'Accept': 'text/plain' } })
@@ -30,15 +22,29 @@ export default class extends Controller {
     )
   }
 
-  filter(event) {
-    console.log(event.currentTarget.value);
-    console.log(this.searchValue)
-    const url = `${this.formTarget.action}?query=${this.searchValue}&guest=${this.searchGuest}&min_price=${this.minPrice}&max_price=${this.maxPrice}&sort=${event.currentTarget.value}`
-    fetch(url, { headers: { 'Accept': 'text/plain' } })
-      .then(response => response.text())
-      .then((data) => {
-        this.listTarget.outerHTML = data;
-      }
-    )
+  url_constructor(sort) {
+    const url = new URL(this.formTarget.action);
+    const params = new URLSearchParams({
+      query: this.searchInputTarget.value,
+      guest: this.searchGuestTarget.value,
+      min_price: this.minPriceTarget.value,
+      max_price: this.maxPriceTarget.value,
+    });
+    if (sort !== "") {
+      params.append("sort", sort);
+    }
+    url.search = params;
+    return url.toString();
+    
   }
+  
+  update(event) {
+    event.preventDefault();
+    this.fetch_flat(this.url_constructor(""));
+  }
+
+  filter(event) {
+    event.preventDefault();
+    this.fetch_flat(this.url_constructor(event.currentTarget.value));
+    }
 }
