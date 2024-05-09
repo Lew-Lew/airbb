@@ -11,6 +11,14 @@ class FlatsController < ApplicationController
       @flats = @flats.where("guest >= ?", params[:guest])
     end
 
+    if params[:min_price].present?
+      @flats = @flats.where("price_per_night >= ?", params[:min_price])
+    end
+
+    if params[:max_price].present?
+      @flats = @flats.where("price_per_night <= ?", params[:max_price])
+    end
+
     if params[:sort].present?
       case params[:sort]
       when 'price_asc'

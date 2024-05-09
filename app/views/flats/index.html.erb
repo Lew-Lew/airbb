@@ -21,6 +21,24 @@
                 search_flat_target: 'searchGuest', 
               }
           %>
+          <%= number_field_tag :min_price,
+              "",
+              class: "form-control",
+              placeholder: "min-price",
+              value: params[:min_price],
+              data: { 
+                search_flat_target: 'minPrice', 
+              }
+          %>
+          <%= number_field_tag :max_price,
+              "",
+              class: "form-control",
+              placeholder: "max-price",
+              value: params[:max_price],
+              data: { 
+                search_flat_target: 'maxPrice', 
+              }
+          %>
         <%= submit_tag "Search", name: "", class: 'btn btn-primary' %>
       <% end %>
     </div>
