@@ -21,7 +21,7 @@ User.create!(email: "user2@email.com", password: "password")
 User.create!(email: "user3@email.com", password: "password")
 
 puts "Creating 23 flats..."
-Flat.create!(name: "Flat in Paris", description: "Nice flat in Paris", price_per_night: 100, user_id: User.first.id, address: "Paris", guest: 4)
+Flat.create!(name: "Flat in Paris", description: "Nice flat in Paris", price_per_night: 100, user_id: User.first.id, address: "Paris", guest: 1)
 Flat.create!(name: "Flat in London", description: "Nice flat in London", price_per_night: 150, user_id: User.first.id, address: "London", guest: 6)
 Flat.create!(name: "Flat in New York", description: "Nice flat in New York", price_per_night: 80, user_id: User.first.id, address: "New York", guest: 2)
 20.times do

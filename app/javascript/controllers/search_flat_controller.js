@@ -2,16 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="search-flat"
 export default class extends Controller {
-  static targets = [ "form", "list", "searchInput" ]
+  static targets = [ "form", "list", "searchInput", "searchGuest" ]
 
   connect() {
     console.log("hello from search flat controller");
   }
-
+  
   update(event) {
     event.preventDefault();
     let searchValue = this.searchInputTarget.value;
-    const url = `${this.formTarget.action}?query=${searchValue}`
+    const url = `${this.formTarget.action}?query=${searchValue}&guest=${this.searchGuestTarget.value}`
     // on va chercher les données de sur l'URL de l'action du formulaire avec les query params
     // les headers permettent de dire qu'on veut récupérer du text/plain 
     fetch(url, { headers: { 'Accept': 'text/plain' } })
@@ -22,7 +22,8 @@ export default class extends Controller {
       .then((data) => {
         this.listTarget.outerHTML = data;
         // remettre l'input à vide
-        this.searchInputTarget.value = '';
+        // this.searchGuestTarget.value = '';
+        // this.searchInputTarget.value = '';
       }
     )
   }

@@ -12,6 +12,15 @@
                 search_flat_target: 'searchInput', 
               }
           %>
+          <%= text_field_tag :guest,
+              "",
+              class: "form-control",
+              placeholder: "guests",
+              value: params[:guest],
+              data: { 
+                search_flat_target: 'searchGuest', 
+              }
+          %>
         <%= submit_tag "Search", name: "", class: 'btn btn-primary' %>
       <% end %>
     </div>

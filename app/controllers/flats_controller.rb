@@ -6,6 +6,11 @@ class FlatsController < ApplicationController
     if params[:query].present?
       @flats = @flats.where("name LIKE ? OR address LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     end
+
+    if params[:guest].present?
+      @flats = @flats.where("guest >= ?", params[:guest])
+    end
+    
     # The `geocoded` scope filters only flats with coordinates
     @markers = @flats.geocoded.map do |flat|
       {
