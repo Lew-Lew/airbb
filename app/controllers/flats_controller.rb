@@ -86,3 +86,5 @@ class FlatsController < ApplicationController
     params.require(:flat).permit(:name, :description, :price_per_night, :address)
   end
 end
+
+

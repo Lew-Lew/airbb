@@ -30,9 +30,11 @@ export default class extends Controller {
       min_price: this.minPriceTarget.value,
       max_price: this.maxPriceTarget.value,
     });
+    // si sort n'est pas vide, on ajoute le paramètre sort à l'URL
     if (sort !== "") {
       params.append("sort", sort);
     }
+    // on ajoute les paramètres à l'URL
     url.search = params;
     return url.toString();
     

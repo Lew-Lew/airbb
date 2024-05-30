@@ -15,16 +15,16 @@
 
           <%= number_field_tag :guest,
               "",
-              class: "form-control is-invalid",
+              class: "form-control",
               placeholder: "guests",
               value: params[:guest],
               data: { 
                 search_flat_target: 'searchGuest', 
               }
           %>
-          <div id="validationServerUsernameFeedback" class="invalid-feedback">
+          <%# <div id="validationServerUsernameFeedback" class="invalid-feedback">
             Please choose a username.
-          </div>
+          </div> %>
           <%= number_field_tag :min_price,
               "",
               class: "form-control",
